@@ -25,17 +25,19 @@ jobs:
           key: Library
 
       # Test
-      - name: Run tests
-        uses: webbertakken/unity-test-runner@v1.3
-        with:
-          unityVersion: 2019.4.14f1
+      #- name: Run tests
+      #  uses: webbertakken/unity-test-runner@v1.3
+       # with:
+      #    unityVersion: 2019.4.14f1
 
       # Build
       - name: Build project
         uses: webbertakken/unity-builder@v0.10
         with:
-          unityVersion: 2019.4.14f1
-          targetPlatform: Android
+          unityVersion: auto
+          targetPlatform:
+            - Android
+            -iOS
 
       # Output
       - uses: actions/upload-artifact@v1
