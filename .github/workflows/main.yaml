@@ -11,6 +11,12 @@ jobs:
   build:
     name: Build my project
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - iOS # Build an iOS player.
+          - Android # Build an Android .apk standalone app.
     steps:
       # Checkout
       - name: Checkout repository
@@ -22,7 +28,9 @@ jobs:
       - uses: actions/cache@v1.1.0
         with:
           path: Library
-          key: Library
+          key: Library-${{ matrix.targetPlatform }}
+          restore-keys: |
+            Library-
 
       # Test
       #- name: Run tests
@@ -35,9 +43,7 @@ jobs:
         uses: webbertakken/unity-builder@v0.10
         with:
           unityVersion: auto
-          targetPlatform:
-            - Android
-            -iOS
+          targetPlatform: ${{ matrix.targetPlatform}}
 
       # Output
       - uses: actions/upload-artifact@v1
