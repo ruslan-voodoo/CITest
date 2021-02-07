@@ -42,7 +42,7 @@ jobs:
       - name: Build project
         uses: webbertakken/unity-builder@v0.10
         with:
-          unityVersion: auto
+          unityVersion: 2019.4.14f1
           targetPlatform: ${{ matrix.targetPlatform}}
 
       # Output
